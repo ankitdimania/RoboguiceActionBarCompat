@@ -1,22 +1,11 @@
 package com.grootcode.roboguice.activity;
 
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.inject.Inject;
-import com.google.inject.Key;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import roboguice.RoboGuice;
 import roboguice.activity.event.OnActivityResultEvent;
 import roboguice.activity.event.OnConfigurationChangedEvent;
-import roboguice.activity.event.OnContentChangedEvent;
 import roboguice.activity.event.OnCreateEvent;
 import roboguice.activity.event.OnDestroyEvent;
 import roboguice.activity.event.OnNewIntentEvent;
@@ -29,12 +18,20 @@ import roboguice.event.EventManager;
 import roboguice.inject.ContentViewListener;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.google.inject.Inject;
+import com.google.inject.Key;
 
 public class RoboActionBarActivity extends ActionBarActivity implements RoboContext {
     protected EventManager eventManager;
     protected HashMap<Key<?>, Object> scopedObjects = new HashMap<Key<?>, Object>();
-    @Inject
-    ContentViewListener ignored; // BUG find a better place to put this
+    @Inject ContentViewListener ignored; // BUG find a better place to put this
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,12 +119,11 @@ public class RoboActionBarActivity extends ActionBarActivity implements RoboCont
         eventManager.fire(new OnConfigurationChangedEvent(currentConfig, newConfig));
     }
 
-//    @Override
-//    public void onContentChanged() {
-//        super.onContentChanged();
-
-//        eventManager.fire(new OnContentChangedEvent());
-//    }
+    // @Override
+    // public void onContentChanged() {
+    // super.onContentChanged();
+    // eventManager.fire(new OnContentChangedEvent());
+    // }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
